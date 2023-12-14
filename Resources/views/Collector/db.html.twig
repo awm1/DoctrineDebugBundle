@@ -485,6 +485,9 @@
                 </thead>
                 <tbody>
                 {% for class in classes %}
+                    {% if class is iterable and 'class' in class|keys %}
+                        {% set class = class['class'] %}
+                    {% endif %}
                     {% set contains_errors = collector.mappingErrors[manager] is defined and collector.mappingErrors[manager][class] is defined %}
                     <tr class="{{ contains_errors ? 'status-error' }}">
                         <td>{{ class }}</td>
